@@ -1,0 +1,42 @@
+{% extends "attendance-templates//base.html" %}
+{% block title %}Attendance{% endblock title%}
+
+{% block body %}
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8  offset-lg-2">
+            <p class="text-center"><img src="{{ url_for('video_feed') }}" height="50%" width="50%"
+                    style="border-radius: 25px"></p>
+            <hr>
+            <p class="text-center"> {{ status }} </p>
+            <form action="{{ url_for('checkin')}}" method="post" onsubmit="ShowLoading()">
+                <p class="text-center"><button type="submit" class="btn btn-success">Check-In</button></p>
+
+                <input type="text" id="firstname" name="name" style="display: none;" value="">
+            </form>
+            <!-- <form action="{{ url_for('checkout')}}" method="post" onsubmit="ShowLoading()">
+
+                <p class="text-center"><button type="submit" class="btn btn-warning">Check-Out</button></p>
+                <input type="text" id="firstname" name="name" style="display: none;" value="">
+            </form> -->
+
+        </div>
+    </div>
+</div>
+
+<!-- <script type="text/javascript">
+    function ShowLoading(e) {
+        var div = document.createElement('div');
+        var img = document.createElement('img');
+        img.src = "{{ url_for('static', filename='images/loader.gif') }}";
+        div.innerHTML = "Analyzing Tweeets ...<br />";
+        div.style.cssText =
+            'position: fixed; top: 5%; left: 36%; z-index: 5000; width: 422px; text-align: center; background:white; ';
+        div.appendChild(img);
+        document.body.appendChild(div);
+        return true;
+    }
+</script> -->
+{% endblock body %}

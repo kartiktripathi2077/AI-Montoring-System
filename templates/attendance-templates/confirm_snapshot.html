@@ -1,0 +1,26 @@
+{% extends "attendance-templates//base.html" %}
+{% block title %}Attendance{% endblock title%}
+
+{% block body %}
+<style>
+    body {
+        background-color: #e0dede;
+    }
+</style>
+<br>
+<br>
+<img class="d-block mx-auto" src="static/temp/{{ session['username'] }}.jpg" height="40%" width="40%"
+style="border-radius: 25px">
+<br>
+<div class="d-flex justify-content-center">
+    <span><form action="/upload" method="post">
+        <button type="submit" class="btn btn-primary btn-lg mx-2">Confirm</button>
+        <input type="text" name="confirm_snapshot" style="display:None;" value="">
+    </form></span>
+    <span><form action="/update">
+        <button type="submit" class="btn btn-secondary btn-lg mx-2">Retake</button>
+    </form></span>
+</div>
+
+
+{% endblock %}

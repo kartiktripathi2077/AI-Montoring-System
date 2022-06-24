@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e0dede;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark d-flex shadow">
+
+        <a class="navbar-brand col-md-3 col-lg-2 px-3" href="/">AI
+            Monitoring System</a>
+
+        <h3 id="emp_name" style="color:white; text-align: center; margin:0;"><strong><u>Welcome
+                    {{session["username"]}}</u></strong>
+        </h3>
+
+        <div class="nav-item dropdown">
+            <a class="nav-link btn btn-sm btn-light dropdown-toggle dropdown-toggle-split m-2" href="#"
+                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                style="color:black; text-align:center;">
+                <span class="visually-hidden">Toggle Dropdown</span>
+                Settings
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/update">Upload Picture</a>
+                <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Change
+                    Password</a>
+                <a class="dropdown-item" href="/leave_application">Leave Application</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/change_password" method="post" id="updateform">
+                        <div class="form-floating mb-2">
+                            <input type="password" class="form-control" id="current_password" placeholder="Password"
+                                name="current_password" required>
+                            <label for="current_password">Current Password</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <input type="password" class="form-control" id="floatingPassword1" placeholder="Password"
+                                name="new_password" onkeyup="analyze();" required>
+                            <label for="floatingPassword1">New Password</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <input type="password" class="form-control" id="floatingPassword2" placeholder="Password"
+                                name="confirm_new_password" onkeyup="check();" required>
+                            <label for="floatingPassword2">Confirm Password</label>
+                        </div>
+                    </form>
+                    <span id="message"></span>
+                </div>
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" form="updateform">Save Changes</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block body %}
+    {% endblock body%}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <!-- <script>
+        let elm = document.getElementById("emp_name");
+        let emp_name_len = elm.textContent.trim().length;
+        let half_width = innerWidth/2;
+        elm.style.position = relative;
+        elm.style.left = half_width - emp_name_len;
+        elm.style.rigth = half_width + emp_name_len;
+    </script> -->
+    <script>
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        var mediumRegex = new RegExp(
+            "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+        var check = function () {
+            if (document.getElementById('floatingPassword1').value ==
+                document.getElementById('floatingPassword2').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Password Matched';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Password is not Matching';
+            }
+        }
+        let analyze = function () {
+            let pw = document.getElementById('floatingPassword1').value
+            if (strongRegex.test(pw)) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Strong Password';
+            } else if (mediumRegex.test(pw)) {
+                document.getElementById('message').style.color = 'orange';
+                document.getElementById('message').innerHTML = 'Medium Password';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Weak Password';
+            }
+        };
+    </script>
+</body>

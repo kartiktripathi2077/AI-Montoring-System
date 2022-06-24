@@ -1,0 +1,77 @@
+{% extends "attendance-templates//base.html" %}
+{% block title %}Attendance{% endblock title%}
+{% block body %}
+<style>
+    body {
+        background-color: #e0dede;
+    }
+</style>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </symbol>
+</svg>
+<br>
+{% if alert %}
+<div>
+    <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert"
+        style="background-color:#15cd7138;">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill" /></svg>
+        <div>
+           Leave Application Successfully Sent!!
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+{% endif %}
+<br>
+<div class="container w-50">
+    <h1><strong>Apply For Leave</strong></h1>
+    <br>
+    <form class="row g-3" action="/leave_application" method="post">
+        <div class="col-md-6">
+            <label for="firstname" class="form-label"><strong>First Name</strong></label>
+            <input type="text" class="form-control" id="firstname" name="firstname" required>
+        </div>
+        <div class="col-md-6">
+            <label for="lastname" class="form-label"><strong>Last Name</strong></label>
+            <input type="text" class="form-control" id="lastname" name="lastname" value="">
+        </div>
+        <div class="col-md-6">
+            <label for="startdate" class="form-label"><strong>Start Date</strong></label>
+            <input type="date" class="form-control" id="startdate" name="startdate" required>
+        </div>
+        <div class="col-md-6">
+            <label for="enddate" class="form-label"><strong>End Date</strong></label>
+            <input type="date" class="form-control" id="enddate" name="enddate" required>
+        </div>
+        <div class="col-12">
+            <label for="leavetype" class="form-label"><strong>Choose Leave Type</strong></label>
+            <select class="form-select" aria-label="Default select example" id="leavetype" name="leavetype" required>
+                <option selected></option>
+                <option value="Sick Leave">Sick Leave</option>
+                <option value="Casual Leave">Casual Leave</option>
+                <option value="Unpaid Leave">Unpaid Leave</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <label for="reason" class="form-label"><strong>Reason</strong></label>
+            <textarea class="form-control" id="reason" rows="3" name="reason" required></textarea>
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck" name="halfday">
+                <label class="form-check-label" for="gridCheck">
+                    Is it a Half Day?
+                </label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
