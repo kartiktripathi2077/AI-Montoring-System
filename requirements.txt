@@ -1,0 +1,18 @@
+flask
+opencv-python
+cmake
+dlib
+face-recognition
+face-recognition-models
+numpy
+opencv-python
+pandas
+pymongo
+dnspython
+bcrypt
+plotly
+# yagmail #for email
+# python-dotenv #for loading env variables
+oauth2client
+httplib2
+google-api-python-client
