@@ -1,0 +1,26 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 100vh;
+  background: #cecece;
+
+}
+.container {
+  height: 200vh;
+  /* background-image: url(https://source.unsplash.com/9600x8900/?software,coder); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}

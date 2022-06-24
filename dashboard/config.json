@@ -1,0 +1,7 @@
+{
+    "mongodb_url" : "mongodb://localhost:27017/",
+    "attendance_database_name" : "Attendance",
+    "login_database_name": "Login-Database",
+    "login_collection_name": "Login",
+    "employee_database_name": "Employee"
+}

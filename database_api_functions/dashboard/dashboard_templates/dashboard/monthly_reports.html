@@ -1,0 +1,34 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% block body %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Dashboard</h1>
+</div>
+
+<h2>MONTHLY REPORTS</h2>
+<br>
+<div class="table-responsive">
+  <table class="table table-striped table-sm table-hover" style="text-align:center">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Reports Present</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for date in dates %}
+      <tr>
+        <td>{{date[0]+1}}</td>
+        {% if emp_reports %}
+        <td><a style="color: black;font-family: 'Ubuntu', sans-serif;"
+          href="/dash/emp_reports/{{ emp_email }}/{{ date[1] }}">{{date[1]}}</a></td>
+        {% else %}
+        <td><a style="color: black;font-family: 'Ubuntu', sans-serif;"
+            href="/dash/reports/{{ date[1] }}">{{date[1]}}</a></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
